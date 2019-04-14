@@ -281,12 +281,7 @@ echo "rpcport=29021" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
 echo "listen=0" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
 echo "externalip=$(hostname -I | cut -f1 -d' '):2219" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
 echo "masternodeprivkey=$MNKEY" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "addnode=0" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "addnode=0" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "addnode=0" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "addnode=0" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "addnode=0" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "addnode=0" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
+echo "addnode=192.210.216.95" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
 MN1=0
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode1 : true" >> /usr/local/nullentrydev/ICA.log
@@ -380,7 +375,7 @@ echo -e "${YELLOW}Once complete, it will stop and copy the block chain to${CLEAR
 echo -e "${YELLOW}the other masternodes. This prevent all masternodes${CLEAR}"
 echo -e "${YELLOW}from downloading the block chain individually; taking up${CLEAR}"
 echo -e "${YELLOW}more time and resources. Current Block count will be displayed below.${CLEAR}"
-until ichibacoin-cli -datadir=/home/ichibacoin/.ichibacoin mnsync status | grep -m 1 'IsBlockchainSynced" : true'; do
+until ichibacoin-cli -datadir=/home/ichibacoin/.ichibacoin mnsync status | grep -m 1 'IsBlockchainSynced": true'; do
 ichibacoin-cli -datadir=/home/ichibacoin/.ichibacoin getblockcount
 sleep 60
 done
