@@ -1,7 +1,7 @@
 #!/bin/bash
 #0.99-- NullEntryDev Script
-NODESL=Three
-NODESN=3
+NODESL=Five
+NODESN=5
 BLUE='\033[0;96m'
 GREEN='\033[0;92m'
 RED='\033[0;91m'
@@ -53,6 +53,20 @@ else
 sudo adduser --system --home /home/ichibacoin3 ichibacoin3
 MN3=0
 fi
+if id "ichibacoin4" >/dev/null 2>&1; then
+echo -e ${YELLOW} "Found user ichibacoin4!"${CLEAR}
+MN4=1
+else
+sudo adduser --system --home /home/ichibacoin4 ichibacoin4
+MN4=0
+fi
+if id "ichibacoin5" >/dev/null 2>&1; then
+echo -e ${YELLOW} "Found user ichibacoin5!"${CLEAR}
+MN5=1
+else
+sudo adduser --system --home /home/ichibacoin5 ichibacoin5
+MN5=0
+fi
 echo
 echo
 echo
@@ -86,6 +100,20 @@ read MNKEY3
 echo
 else
 echo -e ${YELLOW}"Skipping Third Masternode Key"${CLEAR}
+fi
+if [[ "$MN4" -eq "0" ]]; then
+echo -e ${GREEN}"Please Enter Your Fourth Masternode Private Key:"${CLEAR}
+read MNKEY4
+echo
+else
+echo -e ${YELLOW}"Skipping Fourth Masternode Key"${CLEAR}
+fi
+if [[ "$MN5" -eq "0" ]]; then
+echo -e ${GREEN}"Please Enter Your Fifth Masternode Private Key:"${CLEAR}
+read MNKEY5
+echo
+else
+echo -e ${YELLOW}"Skipping Fifth Masternode Key"${CLEAR}
 fi
 cd ~
 if [[ $NULLREC = "y" ]] ; then
@@ -146,6 +174,10 @@ echo -e ${GREEN}"IP for Masternode 2"${CLEAR}
 read MNIP2
 echo -e ${GREEN}"IP for Masternode 3"${CLEAR}
 read MNIP3
+echo -e ${GREEN}"IP for Masternode 4"${CLEAR}
+read MNIP4
+echo -e ${GREEN}"IP for Masternode 5"${CLEAR}
+read MNIP5
 else
 regex='^([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}$'
 FINDIP=$(hostname -I | cut -f2 -d' '| cut -f1-7 -d:)
@@ -181,6 +213,8 @@ for i in {15361..15375}; do printf "${IP}:%.4x\n" $i >> ip.tmp; done
 MNIP1=$(sed -n '1p' < ip.tmp)
 MNIP2=$(sed -n '2p' < ip.tmp)
 MNIP3=$(sed -n '3p' < ip.tmp)
+MNIP4=$(sed -n '4p' < ip.tmp)
+MNIP5=$(sed -n '5p' < ip.tmp)
 rm -rf ip.tmp
 fi
 if grep -Fxq "swapInstalled: true" /usr/local/nullentrydev/mnodes.log
@@ -370,6 +404,72 @@ echo -e ${YELLOW}"Found /home/ichibacoin3/.ichibacoin/ichibacoin.conf"${CLEAR}
 echo -e ${YELLOW}"Skipping Configuration for Third Node"${CLEAR}
 fi
 echo
+if [ ! -f /home/ichibacoin4/.ichibacoin/ichibacoin.conf ]; then
+if [ ! -f /home/ichibacoin4/ichibacoin.conf ]; then
+echo -e "${GREEN}Fourth IchibaCoin Node Configuration Not Found....${CLEAR}"
+echo -e "${GREEN}Configuring Fourth IchibaCoin Node${CLEAR}"
+sudo mkdir /home/ichibacoin4/.ichibacoin
+sudo touch /home/ichibacoin4/ichibacoin.conf
+echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/ichibacoin4/ichibacoin.conf
+echo "rpcpassword=pass"`shuf -i 100000-9999999 -n 1` >> /home/ichibacoin4/ichibacoin.conf
+echo "rpcallowip=127.0.0.1" >> /home/ichibacoin4/ichibacoin.conf
+echo "server=1" >> /home/ichibacoin4/ichibacoin.conf
+echo "daemon=1" >> /home/ichibacoin4/ichibacoin.conf
+echo "maxconnections=250" >> /home/ichibacoin4/ichibacoin.conf
+echo "masternode=1" >> /home/ichibacoin4/ichibacoin.conf
+echo "rpcport=29025" >> /home/ichibacoin4/ichibacoin.conf
+echo "listen=0" >> /home/ichibacoin4/ichibacoin.conf
+echo "externalip=[${MNIP4}]:2219" >> /home/ichibacoin4/ichibacoin.conf
+echo "masternodeprivkey=$MNKEY4" >> /home/ichibacoin4/ichibacoin.conf
+echo "addnode=$(hostname -I | cut -f1 -d' '):2219" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
+if [[ $NULLREC = "y" ]] ; then
+echo "masterNode4 : true" >> /usr/local/nullentrydev/ICA.log
+echo "walletVersion4 : 1.4.0COINVERSION=1.6.0" >> /usr/local/nullentrydev/ICA.log
+echo "scriptVersion4 : 0.99" >> /usr/local/nullentrydev/ICA.log
+fi
+else
+echo
+echo -e ${YELLOW}"Found /home/ichibacoin4/ichibacoin.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Pre-stage for Fourth Node "${CLEAR}
+MN4=0
+fi
+else
+echo -e ${YELLOW}"Found /home/ichibacoin4/.ichibacoin/ichibacoin.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Configuration for Fourth Node"${CLEAR}
+fi
+if [ ! -f /home/ichibacoin5/.ichibacoin/ichibacoin.conf ]; then
+if [ ! -f /home/ichibacoin5/ichibacoin.conf ]; then
+echo -e "${GREEN}Fifth IchibaCoin Node Configuration Not Found....${CLEAR}"
+echo -e "${GREEN}Configuring Fifth IchibaCoin Node${CLEAR}"
+sudo mkdir /home/ichibacoin5/.ichibacoin
+sudo touch /home/ichibacoin5/ichibacoin.conf
+echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/ichibacoin5/ichibacoin.conf
+echo "rpcpassword=pass"`shuf -i 100000-9999999 -n 1` >> /home/ichibacoin5/ichibacoin.conf
+echo "rpcallowip=127.0.0.1" >> /home/ichibacoin5/ichibacoin.conf
+echo "server=1" >> /home/ichibacoin5/ichibacoin.conf
+echo "daemon=1" >> /home/ichibacoin5/ichibacoin.conf
+echo "maxconnections=250" >> /home/ichibacoin5/ichibacoin.conf
+echo "masternode=1" >> /home/ichibacoin5/ichibacoin.conf
+echo "rpcport=29026" >> /home/ichibacoin5/ichibacoin.conf
+echo "listen=0" >> /home/ichibacoin5/ichibacoin.conf
+echo "externalip=[${MNIP5}]:2219" >> /home/ichibacoin5/ichibacoin.conf
+echo "masternodeprivkey=$MNKEY5" >> /home/ichibacoin5/ichibacoin.conf
+echo "addnode=$(hostname -I | cut -f1 -d' '):2219" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
+if [[ $NULLREC = "y" ]] ; then
+echo "masterNode5 : true" >> /usr/local/nullentrydev/ICA.log
+echo "walletVersion5 : 1.4.0COINVERSION=1.6.0" >> /usr/local/nullentrydev/ICA.log
+echo "scriptVersion5 : 0.99" >> /usr/local/nullentrydev/ICA.log
+fi
+else
+echo
+echo -e ${YELLOW}"Found /home/ichibacoin5/ichibacoin.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Pre-stage for Fifth Node "${CLEAR}
+MN5=0
+fi
+else
+echo -e ${YELLOW}"Found /home/ichibacoin5/.ichibacoin/ichibacoin.conf"${CLEAR}
+echo -e ${YELLOW}"Skipping Configuration for Fifth Node"${CLEAR}
+fi
 echo -e "${RED}This process can take a while!${CLEAR}"
 echo -e "${YELLOW}Waiting on First Masternode Block Chain to Synchronize${CLEAR}"
 echo -e "${YELLOW}Once complete, it will stop and copy the block chain to${CLEAR}"
@@ -396,6 +496,18 @@ rm /home/ichibacoin3/.ichibacoin/ichibacoin.conf
 cp -r /home/ichibacoin3/ichibacoin.conf /home/ichibacoin3/.ichibacoin/ichibacoin.conf
 sleep 1
 fi
+if [[ "$MN4" -eq "0" ]]; then
+sudo cp -r /home/ichibacoin/.ichibacoin/* /home/ichibacoin4/.ichibacoin
+rm /home/ichibacoin4/.ichibacoin/ichibacoin.conf
+cp -r /home/ichibacoin4/ichibacoin.conf /home/ichibacoin4/.ichibacoin/ichibacoin.conf
+sleep 1
+fi
+if [[ "$MN5" -eq "0" ]]; then
+sudo cp -r /home/ichibacoin/.ichibacoin/* /home/ichibacoin5/.ichibacoin
+rm /home/ichibacoin5/.ichibacoin/ichibacoin.conf
+cp -r /home/ichibacoin5/ichibacoin.conf /home/ichibacoin5/.ichibacoin/ichibacoin.conf
+sleep 1
+fi
 echo -e ${YELLOW}"Launching First ICA Node"${CLEAR}
 ichibacoind -datadir=/home/ichibacoin/.ichibacoin -daemon
 sleep 20
@@ -405,6 +517,12 @@ sleep 20
 echo -e ${YELLOW}"Launching Third ICA Node"${CLEAR}
 ichibacoind -datadir=/home/ichibacoin3/.ichibacoin -daemon
 sleep 20
+echo -e ${YELLOW}"Launching Fourth ICA Node"${CLEAR}
+ichibacoind -datadir=/home/ichibacoin4/.ichibacoin -daemon
+sleep 20
+echo -e ${YELLOW}"Launching Fifth ICA Node"${CLEAR}
+ichibacoind -datadir=/home/ichibacoin5/.ichibacoin -daemon
+sleep 20
 echo -e ${BOLD}"All ${NODESN} ICA Nodes Launched".${CLEAR}
 echo
 
@@ -412,12 +530,16 @@ echo -e "${GREEN}You can check the status of your ICA Masternode with"${CLEAR}
 echo -e "${YELLOW}For mn1: \"ichibacoin-cli -datadir=/home/ichibacoin/.ichibacoin masternode status\""${CLEAR}
 echo -e "${YELLOW}For mn2: \"ichibacoin-cli -datadir=/home/ichibacoin2/.ichibacoin masternode status\""${CLEAR}
 echo -e "${YELLOW}For mn3: \"ichibacoin-cli -datadir=/home/ichibacoin3/.ichibacoin masternode status\""${CLEAR}
+echo -e "${YELLOW}For mn4: \"ichibacoin-cli -datadir=/home/ichibacoin4/.ichibacoin masternode status\""${CLEAR}
+echo -e "${YELLOW}For mn5: \"ichibacoin-cli -datadir=/home/ichibacoin5/.ichibacoin masternode status\""${CLEAR}
 echo
 echo -e "${RED}Status 29 may take a few minutes to clear while the daemon processes the chainstate"${CLEAR}
 echo -e "${GREEN}The data below needs to be in your local masternode configuration file:${CLEAR}"
 echo -e "${BOLD} Masternode - \#1 IP: $(hostname -I | cut -f1 -d' '):2219${CLEAR}"
 echo -e "${BOLD} Masternode - \#2 IP: [${MNIP2}]:2219${CLEAR}"
 echo -e "${BOLD} Masternode - \#3 IP: [${MNIP3}]:2219${CLEAR}"
+echo -e "${BOLD} Masternode - \#4 IP: [${MNIP4}]:2219${CLEAR}"
+echo -e "${BOLD} Masternode - \#5 IP: [${MNIP5}]:2219${CLEAR}"
 fi
 echo -e ${BLUE}" Your patronage is appreciated, tipping addresses"${CLEAR}
 echo -e ${BLUE}" IchibaCoin address: iAAVTcoF14zQgVbUcoVASoRGDxWy3kYzRz"${CLEAR}
