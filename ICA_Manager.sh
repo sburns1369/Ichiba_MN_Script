@@ -13,7 +13,7 @@ ICA=0
 #Masternode Counter
 ICAC=0
 #Coinname Lowercase
-COINl=ichiba
+COINl=ichibacoin
 #Coin ticket symbol
 COIN3=ICA
 COIN3l=ica
@@ -1103,14 +1103,22 @@ function_masternode_upgrade(){
     local choice
   	read -p "Enter choice " choice
     case $choice in
-      1)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ichiba_MN_Script/master/Ichibacoin_singleV4.sh);;
-      2)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_2pack.sh);;
-      3)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_3pack.sh);;
-      4)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_4pack.sh);;
-      5)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_5pack.sh);;
-      6)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_6pack.sh);;
-      7)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_7pack.sh);;
-      8)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_8pack.sh);;
+      1)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/ichiba_MN_Script/master/Ichibacoin_singleV4.sh)
+      pause ;;
+      2)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_2pack.sh)
+      pause ;;
+      3)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_3pack.sh)
+      pause ;;
+      4)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_4pack.sh)
+      pause ;;
+      5)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_5pack.sh)
+      pause ;;
+      6)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_6pack.sh)
+      pause ;;
+      7)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_7pack.sh)
+      pause ;;
+      8)bash <(curl -Ls https://raw.githubusercontent.com/sburns1369/Ichiba_MN_Script/master/Ichibacoin_8pack.sh)
+      pause ;;
       b) echo -e "backing out" ;;
       B) echo -e "backing out" ;;
       x) exit 0;;
