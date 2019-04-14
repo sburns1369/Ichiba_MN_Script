@@ -319,7 +319,7 @@ echo "rpcport=29022" >> /home/ichibacoin2/ichibacoin.conf
 echo "listen=0" >> /home/ichibacoin2/ichibacoin.conf
 echo "externalip=[${MNIP2}]:2219" >> /home/ichibacoin2/ichibacoin.conf
 echo "masternodeprivkey=$MNKEY2" >> /home/ichibacoin2/ichibacoin.conf
-echo "addnode=[${MNIP1}]" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
+echo "addnode=$(hostname -I | cut -f1 -d' '):2219" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode2 : true" >> /usr/local/nullentrydev/ICA.log
 echo "walletVersion2 : 1.4.0COINVERSION=1.6.0" >> /usr/local/nullentrydev/ICA.log
@@ -353,6 +353,7 @@ echo "rpcport=29024" >> /home/ichibacoin3/ichibacoin.conf
 echo "listen=0" >> /home/ichibacoin3/ichibacoin.conf
 echo "externalip=[${MNIP3}]:2219" >> /home/ichibacoin3/ichibacoin.conf
 echo "masternodeprivkey=$MNKEY3" >> /home/ichibacoin3/ichibacoin.conf
+echo "addnode=$(hostname -I | cut -f1 -d' '):2219" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode3 : true" >> /usr/local/nullentrydev/ICA.log
 echo "walletVersion3 : 1.4.0COINVERSION=1.6.0" >> /usr/local/nullentrydev/ICA.log
