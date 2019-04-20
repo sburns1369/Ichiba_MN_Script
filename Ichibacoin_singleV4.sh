@@ -33,10 +33,17 @@ echo -e ${YELLOW}"If you have custom IPs hit y for yes"${CLEAR}
 read customIP
 echo "Creating ${NODESN} IchibaCoin system user(s) with no-login access:"
 if id "ichibacoin" >/dev/null 2>&1; then
+echo "legacy user exists"
+MNl=1
+else
+sudo adduser --system --home /home/ichibacoin ichibacoin
+MNl=0
+fi
+if id "ichibacoin1" >/dev/null 2>&1; then
 echo "user exists"
 MN1=1
 else
-sudo adduser --system --home /home/ichibacoin ichibacoin
+sudo adduser --system --home /home/ichibacoin1 ichibacoin1
 MN1=0
 fi
 echo
@@ -114,6 +121,7 @@ fi
 if [[ customIP = "y" ]] ; then
 echo -e ${GREEN}"IP for Masternode 1"${CLEAR}
 read MNIP1
+MNIP1=$(hostname -I | cut -f1 -d' ')
 fi
 if grep -Fxq "swapInstalled: true" /usr/local/nullentrydev/mnodes.log
 then
@@ -198,22 +206,22 @@ sleep 3
 sudo mv /root/ICA/ichibacoind /root/ICA/ichibacoin-cli /usr/local/bin
 sudo chmod 755 -R /usr/local/bin/ichibacoin*
 rm -rf /root/ICA
-if [ ! -f /home/ichibacoin/.ichibacoin/ichibacoin.conf ]; then
+if [ ! -f /home/ichibacoin1/.ichibacoin/ichibacoin.conf ]; then
 echo -e "${GREEN}Configuring IchibaCoin Node${CLEAR}"
-sudo mkdir /home/ichibacoin/.ichibacoin
-sudo touch /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "rpcpassword=pass"`shuf -i 100000-9999999 -n 1` >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "rpcallowip=127.0.0.1" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "server=1" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "daemon=1" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "maxconnections=250" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "masternode=1" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "rpcport=29021" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "listen=0" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "externalip=$(hostname -I | cut -f1 -d' '):2219" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "masternodeprivkey=$MNKEY" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
-echo "addnode=192.210.216.95" >> /home/ichibacoin/.ichibacoin/ichibacoin.conf
+sudo mkdir /home/ichibacoin1/.ichibacoin
+sudo touch /home/ichibacoin1/.ichibacoin/ichibacoin.conf
+echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/ichibacoin1/.ichibacoin/ichibacoin.conf
+echo "rpcpassword=pass"`shuf -i 100000-9999999 -n 1` >> /home/ichibacoin1/.ichibacoin/ichibacoin.conf
+echo "rpcallowip=127.0.0.1" >> /home/ichibacoin1/.ichibacoin/ichibacoin.conf
+echo "server=1" >> /home/ichibacoin1/.ichibacoin/ichibacoin.conf
+echo "daemon=1" >> /home/ichibacoin1/.ichibacoin/ichibacoin.conf
+echo "maxconnections=250" >> /home/ichibacoin1/.ichibacoin/ichibacoin.conf
+echo "masternode=1" >> /home/ichibacoin1/.ichibacoin/ichibacoin.conf
+echo "rpcport=29021" >> /home/ichibacoin1/.ichibacoin/ichibacoin.conf
+echo "listen=0" >> /home/ichibacoin1/.ichibacoin/ichibacoin.conf
+echo "externalip=$(hostname -I | cut -f1 -d' '):2219" >> /home/ichibacoin1/.ichibacoin/ichibacoin.conf
+echo "masternodeprivkey=$MNKEY" >> /home/ichibacoin1/.ichibacoin/ichibacoin.conf
+echo "addnode=0" >> /home/ichibacoin1/.ichibacoin/ichibacoin.conf
 MN1=0
 if [[ $NULLREC = "y" ]] ; then
 echo "masterNode1 : true" >> /usr/local/nullentrydev/ICA.log
@@ -221,12 +229,12 @@ echo "walletVersion1 : 1.4.0COINVERSION=1.6.0" >> /usr/local/nullentrydev/ICA.lo
 echo "scriptVersion1 : 0.99" >> /usr/local/nullentrydev/ICA.log
 fi
 else
-echo -e ${YELLOW}"Found /home/ichibacoin/.ichibacoin/ichibacoin.conf"${CLEAR}
+echo -e ${YELLOW}"Found /home/ichibacoin1/.ichibacoin/ichibacoin.conf"${CLEAR}
 echo -e ${YELLOW}"Skipping Configuration there"${CLEAR}
 fi
 echo
 echo -e ${YELLOW}"Launching ICA Node"${CLEAR}
-ichibacoind -datadir=/home/ichibacoin/.ichibacoin -daemon
+ichibacoind -datadir=/home/ichibacoin1/.ichibacoin -daemon
 echo
 echo -e ${YELLOW}"Looking for a Shared Masternode Service? Check out Crypto Hash Tank" ${CLEAR}
 echo -e ${YELLOW}"Support my Project, and put your loose change to work for you!" ${CLEAR}
@@ -236,8 +244,8 @@ echo -e ${YELLOW}"Special Thanks to the BitcoinGenX (BGX) Community" ${CLEAR}
 sleep 20
 echo -e "${RED}This process can take a while!${CLEAR}"
 echo -e "${YELLOW}Waiting on Masternode Block Chain to Synchronize${CLEAR}"
-until ichibacoin-cli -datadir=/home/ichibacoin/.ichibacoin mnsync status | grep -m 1 'IsBlockchainSynced": true'; do
-ichibacoin-cli -datadir=/home/ichibacoin/.ichibacoin getblockcount
+until ichibacoin-cli -datadir=/home/ichibacoin1/.ichibacoin mnsync status | grep -m 1 'IsBlockchainSynced": true'; do
+ichibacoin-cli -datadir=/home/ichibacoin1/.ichibacoin getblockcount
 sleep 60
 done
 
@@ -246,8 +254,8 @@ echo -e ${BOLD}"Your ICA Node has Launched."${CLEAR}
 echo
 
 echo -e "${GREEN}You can check the status of your ICA Masternode with"${CLEAR}
-echo -e "${YELLOW} ichibacoin-cli -datadir=/home/ichibacoin/.ichibacoin masternode status"${CLEAR}
-echo -e "${YELLOW}For mn1: \"ichibacoin-cli -datadir=/home/ichibacoin/.ichibacoin masternode status\""${CLEAR}
+echo -e "${YELLOW} ichibacoin-cli -datadir=/home/ichibacoin1/.ichibacoin masternode status"${CLEAR}
+echo -e "${YELLOW}For mn1: \"ichibacoin-cli -datadir=/home/ichibacoin1/.ichibacoin masternode status\""${CLEAR}
 echo
 echo -e "${RED}Status 29 may take a few minutes to clear while the daemon processes the chainstate"${CLEAR}
 echo -e "${GREEN}The data below needs to be in your local masternode configuration file:${CLEAR}"
@@ -261,6 +269,6 @@ echo
 echo -e ${YELLOW}"Need help? Find Sburns1369\#1584 on Discord - https://discord.gg/YhJ8v3g"${CLEAR}
 echo -e ${YELLOW}"If Direct Messaged please verify by clicking on the profile!"${CLEAR}
 echo -e ${YELLOW}"it says Sburns1369 in bigger letters followed by a little #1584" ${CLEAR}
-echo -e ${YELLOW}"Anyone can clone my name, but not the #1384".${CLEAR}
+echo -e ${YELLOW}"Anyone can clone my name, but not the #1584".${CLEAR}
 echo
 echo -e ${RED}"The END."${CLEAR};
