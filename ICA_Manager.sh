@@ -141,8 +141,8 @@ show_mainMenu() {
   echo -e "1 - My Masternode(s) Status"
   echo -e "2 - Install or Add Masternodes"
   echo -e "3 - Masternode Manager"
+  echo -e "4 - Donate"
   echo -e "5 - Maintenance"
-  echo -e "4 - Donate - (Not Implimented)"
   echo -e "X - Exit"
   read_MainMenuOptions
 }
@@ -154,7 +154,7 @@ read_MainMenuOptions(){
 		1) find_Masternodes ;;
 		2) function_masternode_upgrade ;;
     3) manager_ICAMasternodes;;
-    4) find_Masternodes_test ;;
+    4) function_Donations ;;
     5) manager_maintenance ;;
     x) exit 0;;
 		*) echo -e "${RED}Error...${STD}" ${CLEAR} && sleep 2
@@ -1136,6 +1136,21 @@ function_masternode_upgrade(){
 function_masternode_migrate(){
   #attempt to move legacy masternode
   echo null#possible attempt to relocate stock scripts
+}
+function_Donations(){
+  #attempt to move legacy masternode
+    clear
+    echo
+    echo
+    echo
+    echo -e "Donations can be made to multiple addresses for multiple projects"
+    echo -e "IchibaCoin address: iAAVTcoF14zQgVbUcoVASoRGDxWy3kYzRz"
+    echo -e "BTC address: 32FzghE1yUZRdDmCkj3bJ6vJyXxUVPKY93"
+    echo -e "BGX address: BayScFpFgPBiDU1XxdvozJYVzM2BQvNFgM"
+    echo -e "XGS address: GcToAa57WXPsVwXB9LKvui215AC3bsvneA"
+    echo -e "LTC address: MUdDdVr4Az1dVw47uC4srJ31Ksi5SNkC7H"
+    pause
+
 }
 ### End - Masternode function_Masternode_upgrade
 #Program Core
