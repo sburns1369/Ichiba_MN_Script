@@ -34,10 +34,10 @@ read customIP
 echo "Creating ${NODESN} IchibaCoin system user(s) with no-login access:"
 if id "ichibacoin" >/dev/null 2>&1; then
 echo "legacy user exists"
-MNl=1
-else
-sudo adduser --system --home /home/ichibacoin ichibacoin
-MNl=0
+#MNl=1
+#else
+#sudo adduser --system --home /home/ichibacoin ichibacoin
+#MNl=0
 fi
 if id "ichibacoin1" >/dev/null 2>&1; then
 echo "user exists"
