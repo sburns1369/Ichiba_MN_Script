@@ -1035,7 +1035,7 @@ echo -e ${YELLOW}"Need help?  Find Sburns1369#1584 one Discord - https://discord
 }
 ### Start - Masternode function_calculate_Masternode_Install
 function_new_masternode_install_menu(){
-  echo -e ${GREEN}" How many ${COIN3} Masternode(s) would you like to Install? [1 - 10]"${CLEAR}
+  echo -e ${GREEN}" How many ${COIN3} Masternode(s) would you like to Install? [1 - 8]"${CLEAR}
   echo -e "Press [C] to exit"
   read -p "Enter Number : " Install_Count
   case $Install_Count in
@@ -1090,14 +1090,14 @@ function_masternode_upgrade(){
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     echo "   How Many Masternode Do you want to Run?"
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    echo -e "01 - One Masternode"
-    echo -e "02 - Masternode Two"
-    echo -e "03 - Masternode Three"
-    echo -e "04 - Masternode Four"
-    echo -e "05 - Masternode Five"
-    echo -e "06 - Masternode Six"
-    echo -e "07 - Masternode Seven"
-    echo -e "08 - Masternode Eight"
+    echo -e "1 - One Masternode"
+    echo -e "2 - Masternode Two"
+    echo -e "3 - Masternode Three"
+    echo -e "4 - Masternode Four"
+    echo -e "5 - Masternode Five"
+    echo -e "6 - Masternode Six"
+    echo -e "7 - Masternode Seven"
+    echo -e "8 - Masternode Eight"
     echo -e "B - Back out of Menu"
     echo -e "X - Exit"
     function_read_masternode_upgrade
