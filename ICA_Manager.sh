@@ -68,28 +68,33 @@ echo "                                                                          
 pause
 }
 #GenesisX logo
-GenesisX_Logo(){
+IchibaCoin_Logo(){
   clear
   echo "                                                                      ";
   echo "                                                                      ";
-  echo "                                                                      ";
-  echo -e ${YELLOW}"   ██████╗ ███████╗███╗   ██╗███████╗███████╗██╗███████╗ ${RED}   ██╗  ██╗ ";
-  echo -e ${YELLOW}"  ██╔════╝ ██╔════╝████╗  ██║██╔════╝██╔════╝██║██╔════╝ ${RED}   ╚██╗██╔╝ ";
-  echo -e ${YELLOW}"  ██║  ███╗█████╗  ██╔██╗ ██║█████╗  ███████╗██║███████╗ ${RED}    ╚███╔╝  ";
-  echo -e ${YELLOW}"  ██║   ██║██╔══╝  ██║╚██╗██║██╔══╝  ╚════██║██║╚════██║ ${RED}    ██╔██╗  ";
-  echo -e ${YELLOW}"  ╚██████╔╝███████╗██║ ╚████║███████╗███████║██║███████║ ${RED}   ██╔╝ ██╗ ";
-  echo -e ${YELLOW}"   ╚═════╝ ╚══════╝╚═╝  ╚═══╝╚══════╝╚══════╝╚═╝╚══════╝ ${RED}   ╚═╝  ╚═╝ ";
+  echo -e "      ${Yellow}                                                                ";
+echo " ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄         ▄  ▄▄▄▄▄▄▄▄▄▄▄  ▄▄▄▄▄▄▄▄▄▄   ▄▄▄▄▄▄▄▄▄▄▄ ";
+echo "▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░▌ ▐░░░░░░░░░░░▌";
+echo " ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀▀▀ ▐░▌       ▐░▌ ▀▀▀▀█░█▀▀▀▀ ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌";
+echo "     ▐░▌     ▐░▌          ▐░▌       ▐░▌     ▐░▌     ▐░▌       ▐░▌▐░▌       ▐░▌";
+echo "     ▐░▌     ▐░▌          ▐░█▄▄▄▄▄▄▄█░▌     ▐░▌     ▐░█▄▄▄▄▄▄▄█░▌▐░█▄▄▄▄▄▄▄█░▌";
+echo "     ▐░▌     ▐░▌          ▐░░░░░░░░░░░▌     ▐░▌     ▐░░░░░░░░░░▌ ▐░░░░░░░░░░░▌";
+echo "     ▐░▌     ▐░▌          ▐░█▀▀▀▀▀▀▀█░▌     ▐░▌     ▐░█▀▀▀▀▀▀▀█░▌▐░█▀▀▀▀▀▀▀█░▌";
+echo "     ▐░▌     ▐░▌          ▐░▌       ▐░▌     ▐░▌     ▐░▌       ▐░▌▐░▌       ▐░▌";
+echo " ▄▄▄▄█░█▄▄▄▄ ▐░█▄▄▄▄▄▄▄▄▄ ▐░▌       ▐░▌ ▄▄▄▄█░█▄▄▄▄ ▐░█▄▄▄▄▄▄▄█░▌▐░▌       ▐░▌";
+echo "▐░░░░░░░░░░░▌▐░░░░░░░░░░░▌▐░▌       ▐░▌▐░░░░░░░░░░░▌▐░░░░░░░░░░▌ ▐░▌       ▐░▌";
+echo " ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀         ▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀   ▀         ▀ ";
   echo -e "                                                                   ";
   echo -e "${GREEN}                                                           ";
-  echo -e "                          SECURITY | PRIVACY                       ";
-  echo -e "                      TRANSPARENCY | GOVERNANCE                    ";
-  echo -e "                                                                   ";
-  echo -e "                 On the Web --  https://www.genesisx.network/      ";
-  echo -e "             XGS Offical Discord -- https://discord.gg/Vbh7CgG     ";
-  echo -e "                                                                   ";
+  echo -e "                  ╔╦╗┌─┐┌─┐┌┬┐┌─┐┬─┐┌┐┌┌─┐┌┬┐┌─┐";
+  echo -e "                  ║║║├─┤└─┐ │ ├┤ ├┬┘││││ │ ││├┤ ";
+  echo -e "                  ╩ ╩┴ ┴└─┘ ┴ └─┘┴└─┘└┘└─┘─┴┘└─┘";
+  echo -e "                      ╔╦╗┌─┐┌┐┌┌─┐┌─┐┌─┐┬─┐         ";
+  echo -e "                      ║║║├─┤│││├─┤│ ┬├┤ ├┬┘         ";
+  echo -e "                      ╩ ╩┴ ┴┘└┘┴ ┴└─┘└─┘┴└─         ";
   echo
-  echo -e "${BLUE}  This Script was made by request of a community member"
-  echo -e "${BLUE}  NOT to be mistaken as part of the offical BGX Project"
+  echo -e "${BLUE}      This Script was made by request of a community member"
+  echo -e "${BLUE}      NOT to be mistaken as part of the official BGX Project"
   echo -e "${CLEAR}"
   echo
   echo
@@ -99,7 +104,7 @@ GenesisX_Logo(){
 BitCoinGenX_Logo(){
   clear
   echo
-  echo
+  echo -e "${BLUE} This Script was sponsored by :" ${CLEAR}
   echo -e "${GREEN}"
   echo -e " ██████╗ ██╗████████╗ ██████╗ ██████╗ ██╗███╗   ██╗ ";
   echo -e " ██╔══██╗██║╚══██╔══╝██╔════╝██╔═══██╗██║████╗  ██║ ";
@@ -119,10 +124,10 @@ BitCoinGenX_Logo(){
   echo -e " ${RED}       * ZeroCoin Protocol *      ╚═╝      ╚═╝         "
   echo
   echo -e "${GREEN}        On the Web : https://btcgenx.net/ "
-  echo -e "${GREEN}   Offical Discord : https://discord.gg/QQHgkuV "
+  echo -e "${GREEN}   Official Discord : https://discord.gg/QQHgkuV "
   echo
   echo -e "${BLUE}  This Script was made by request of a community member"
-  echo -e "${BLUE}  NOT to be mistaken as part of the offical BGX Project"
+  echo -e "${BLUE}  NOT to be mistaken as part of the official BGX Project"
   echo -e "${CLEAR}"
   echo
   pause
@@ -251,14 +256,14 @@ read_manager_maintenance(){
 #start_masternodes_Menu
 manager_Start_Masternodes(){
   clear
-  echo "~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~"
   echo "   Start Masternode(s)"
-  echo "~~~~~~~~~~~~~~~~~~~~~"
+  echo "~~~~~~~~~~~~~~~~~~~~~~~~"
   if [ -d /home/${COINl} ]; then
   echo -e "L - Legacy Masternode One Status"
   fi
   if [ -d /home/${COINl}1 ]; then
-  echo -e "01 - (Not This one, you have legacy) (1.0 and new install)"
+  echo -e "01 - Masternode One"
   fi
   if [ -d /home/${COINl}2 ]; then
   echo -e "02 - Masternode Two"
@@ -343,7 +348,7 @@ function_menu_Reindex_Masternodes(){
   echo -e "L - Legacy Masternode One Status"
   fi
   if [ -d /home/${COINl}1 ]; then
-  echo -e "01 - Masternode One (1.0 and new install)"
+  echo -e "01 - Masternode One"
   fi
   if [ -d /home/${COINl}2 ]; then
   echo -e "02 - Masternode Two"
@@ -825,8 +830,8 @@ echo
 #start function_update
 function_update() {
     echo -e ${RED}"Updating Apps"${CLEAR}
-    sudo apt-get -y update
-    sudo apt-get -y upgrade
+    #sudo apt-get -y update
+    #sudo apt-get -y upgrade
 }
 # Operating Systems Check
 first_run(){
@@ -1083,7 +1088,7 @@ fi
 function_masternode_upgrade(){
     clear
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-    echo "   How Many Masternode Do you with to Run?"
+    echo "   How Many Masternode Do you want to Run?"
     echo "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
     echo -e "01 - One Masternode"
     echo -e "02 - Masternode Two"
@@ -1137,7 +1142,7 @@ function_masternode_migrate(){
 clear
 null_logo
 BitCoinGenX_Logo
-GenesisX_Logo
+IchibaCoin_Logo
 function_check_first_run
 while true
 do
