@@ -142,7 +142,7 @@ show_mainMenu() {
   echo -e "2 - Install or Add Masternodes"
   echo -e "3 - Masternode Manager"
   echo -e "4 - Donate"
-  echo -e "5 - Maintenance"
+#  echo -e "5 - Maintenance"
   echo -e "X - Exit"
   read_MainMenuOptions
 }
