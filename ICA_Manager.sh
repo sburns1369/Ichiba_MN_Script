@@ -1144,6 +1144,7 @@ function_Donations(){
     echo
     echo
     echo -e "Donations can be made to multiple addresses for multiple projects"
+    echo
     echo -e "IchibaCoin address: iAAVTcoF14zQgVbUcoVASoRGDxWy3kYzRz"
     echo -e "BTC address: 32FzghE1yUZRdDmCkj3bJ6vJyXxUVPKY93"
     echo -e "BGX address: BayScFpFgPBiDU1XxdvozJYVzM2BQvNFgM"
