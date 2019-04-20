@@ -7,6 +7,7 @@ GREEN='\033[0;92m'
 RED='\033[0;91m'
 YELLOW='\033[0;93m'
 CLEAR='\033[0m'
+MNIP1=$(hostname -I | cut -f1 -d' ')
 if [[ $(lsb_release -d) != *16.04* ]]; then
 "echo -e ${RED}"The operating system is not Ubuntu 16.04. You must be running on ubuntu 16.04."${CLEAR}"
 exit 1
