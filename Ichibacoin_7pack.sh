@@ -659,7 +659,7 @@ echo -e "${YELLOW}For mn7: \"ichibacoin-cli -datadir=/home/ichibacoin7/.ichibaco
 echo
 echo -e "${RED}Status 29 may take a few minutes to clear while the daemon processes the chainstate"${CLEAR}
 echo -e "${GREEN}The data below needs to be in your local masternode configuration file:${CLEAR}"
-echo -e "${BOLD} Masternode - \#1 IP: [${MNIP1}]:2219${CLEAR}"
+echo -e "${BOLD} Masternode - \#1 IP: ${MNIP1}:2219${CLEAR}"
 echo -e "${BOLD} Masternode - \#2 IP: [${MNIP2}]:2219${CLEAR}"
 echo -e "${BOLD} Masternode - \#3 IP: [${MNIP3}]:2219${CLEAR}"
 echo -e "${BOLD} Masternode - \#4 IP: [${MNIP4}]:2219${CLEAR}"
