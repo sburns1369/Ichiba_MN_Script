@@ -123,8 +123,9 @@ BitCoinGenX_Logo(){
   echo -e "  ${YELLOW}        * Green Protocol *       ██╔╝     ██╗    ";
   echo -e " ${RED}       * ZeroCoin Protocol *      ╚═╝      ╚═╝         "
   echo
-  echo -e "${GREEN}        On the Web : https://btcgenx.net/ "
-  echo -e "${GREEN}   Official Discord : https://discord.gg/QQHgkuV "
+  echo -e "${GREEN}     On the Web (BGX Wallets) : https://btcgenx.net/ "
+  echo -e "${GREEN}      Official Discord : https://discord.gg/QQHgkuV "
+  echo -e "${GREEN}Buy BGX : https://app.stex.com/en/basic-trade/pair/BTC/BGX "
   echo
   echo -e "${BLUE}  This Script was made by request of a community member"
   echo -e "${BLUE}  NOT to be mistaken as part of the official BGX Project"
