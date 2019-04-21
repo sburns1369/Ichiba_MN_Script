@@ -93,7 +93,7 @@ echo " ▀▀▀▀▀▀▀▀▀▀▀  ▀▀▀▀▀▀▀▀▀▀▀  ▀
   echo -e "                      ║║║├─┤│││├─┤│ ┬├┤ ├┬┘         ";
   echo -e "                      ╩ ╩┴ ┴┘└┘┴ ┴└─┘└─┘┴└─         ";
   echo
-  echo -e "${BLUE}      This Script was made by request of a community member"
+  echo -e "${BLUE}     This Script was made by request of a BGX community member"
   echo -e "${BLUE}      NOT to be mistaken as part of the official BGX Project"
   echo -e "${CLEAR}"
   echo
