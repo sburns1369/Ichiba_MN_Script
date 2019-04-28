@@ -145,17 +145,24 @@ function_check_first_run(){
       echo "Not First Run - Testing Check Point"
       pause
     else
+  clear
+  echo
+  echo
+  echo
+  echo
   echo
   echo -e ${YELLOW}"Welcome to the Beta Masternode Manager Script by ${BLUE}NullEntry"${CLEAR}
   echo -e ${RED}'THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND'${CLEAR}
   echo
   echo -e ${BLUE}"May this script will store a small amount data in /usr/local/nullentrydev/ ?"${CLEAR}
-  echo -e ${BLUE}"This information is for version updates and later implimentation"${CLEAR}
-  echo -e ${BLUE}"Zero Confidental information or Wallet keys will be stored in it"${CLEAR}
+  echo -e ${BLUE}"This information is for version updates, masternode installation, file repair"${CLEAR}
+  echo -e ${BLUE}"and later implimentation. Zero information is transmitted off the VPS or collected"${CLEAR}
+  echo -e ${BLUE}"for any advertising or information harvesting."${CLEAR}
   echo
   echo -e ${BLUE}"Upon agrement it will start to automatically install the Libraries and code"${CLEAR}
   echo -e ${BLUE}"needed for most masternodes and this script. As well as Update and Upgrade"${CLEAR}
   echo -e ${BLUE}"existing software on your VPS. Additional dependencies May be installed later"${CLEAR}
+  echo
   echo
   echo -e ${YELLOW}"Press [Y]es to agree or [N]o to disagree; follow by [ENTER Key]"${CLEAR}
   read  -p "Enter choice : " NULLREC
@@ -376,8 +383,6 @@ read_Start_Masternodes(){
   esac
 }
 #End - read Start Masternodes Menu
-
-
 #start function_menu_Reindex_Masternodes
 function_menu_Reindex_Masternodes(){
   clear
@@ -902,7 +907,7 @@ function_first_run(){
       }
 # Checking to see if Dependencies & Software Libraries have been installed
 function_dependencies(){
-    if grep -Fxq "dependenciesInstalled: true" /usr/local/nullentrydev/mnodes.log
+  if [ -f /usr/local/nullentrydev/mnodes.log ] && grep -Fxq "dependenciesInstalled: true" /usr/local/nullentrydev/mnodes.log
       then
   echo
   echo -e ${RED}"Skipping... Dependencies & Software Libraries - Previously installed"${CLEAR}
@@ -952,13 +957,17 @@ function_first_nodecheck(){
         echo -e "${GREEN}This is going to take a few minutes, and when done will display"
         echo -e "${GREEN}information you need for your masternode.conf on your local wallet"
         echo
-        echo -e ${GREEN}"Please Enter Your First Masternode Private Key:"${CLEAR}
+        echo -e ${GREEN}"Do you have Masternode Private Keys you want to use; or would you"${CLEAR}
+        echo -e ${GREEN}"like this script to generate them for you?"${CLEAR}
         read MNKEY1
         function_install
         #add Regex or "are you sure"
         fi
       fi
       }
+function_swap_space(){
+
+}
 #### end apps/update  install functions?
 #>>>>>>>>>><<<<<<<<<<<<<<  make function for IP tables
 ### Start Building IP Tables function
@@ -1102,7 +1111,9 @@ echo -e "${YELLOW}more time and resources.  Current Block count will be displaye
 ${COINDAEMONCLI} -datadir=/home/${COINl}${nodeunit}/${COINCORE} getblockcount
 sleep 5
 #node 1 sync check
-until ${COINDAEMONCLI} -datadir=/home/${COINl}${nodeunit}/${COINCORE} mnsync status | grep -m 1 'IsBlockchainSynced" : true'; do
+#select proper isblocked sync'd syntax
+#until ${COINDAEMONCLI} -datadir=/home/${COINl}${nodeunit}/${COINCORE} mnsync status | grep -m 1 'IsBlockchainSynced" : true'; do
+until ${COINDAEMONCLI} -datadir=/home/${COINl}${nodeunit}/${COINCORE} mnsync status | grep -m 1 'IsBlockchainSynced": true'; do
     ${COINDAEMONCLI} -datadir=/home/${COINl}${nodeunit}/${COINCORE} getblockcount
     sleep 5
   done
@@ -1212,7 +1223,6 @@ function_Donations(){
     echo
     echo -e ${YELLOW}"Need help?  Find Sburns1369#1584 one Discord - https://discord.gg/YhJ8v3g"${CLEAR}
     pause
-
 }
 function_build_IP(){
 if [[ customIP = "y" ]] ; then
@@ -1220,6 +1230,22 @@ echo -e ${GREEN}"IP for Masternode 1"${CLEAR}
 read MNIP1
 echo -e ${GREEN}"IP for Masternode 2"${CLEAR}
 read MNIP2
+echo -e ${GREEN}"IP for Masternode 3"${CLEAR}
+read MNIP3
+echo -e ${GREEN}"IP for Masternode 4"${CLEAR}
+read MNIP4
+echo -e ${GREEN}"IP for Masternode 5"${CLEAR}
+read MNIP5
+echo -e ${GREEN}"IP for Masternode 6"${CLEAR}
+read MNIP6
+echo -e ${GREEN}"IP for Masternode 7"${CLEAR}
+read MNIP7
+echo -e ${GREEN}"IP for Masternode 8"${CLEAR}
+read MNIP8
+echo -e ${GREEN}"IP for Masternode 9"${CLEAR}
+read MNIP9
+echo -e ${GREEN}"IP for Masternode 10"${CLEAR}
+read MNIP10
 else
 regex='^([0-9a-fA-F]{0,4}:){1,7}[0-9a-fA-F]{0,4}$'
 FINDIP=$(hostname -I | cut -f2 -d' '| cut -f1-7 -d:)
@@ -1250,22 +1276,22 @@ fi
 echo ${MNIP1} testing note
 echo ${IP} testing note
 echo -e ${YELLOW} "Building IP Tables"${CLEAR}
-sudo touch ${DPATH}ip.tmp
-echo \#If editing IP Table list them below.  Starting from masternode 1 to 10 > ${DPATH}ip.tmp
-echo \#IPv4 and IPv6 are accepted.  Masternode needs to be rebuilt >> ${DPATH}ip.tmp
-echo \#unless IPs are entered in configuration directly.  >> ${DPATH}ip.tmp
-echo $(hostname -I | cut -f1 -d' ') >> ${DPATH}ip.tmp
-for i in {15362..15372}; do printf "${IP}:%.4x\n" $i >> ${DPATH}ip.tmp; done
-MNIP1=$(sed -n '4p' < ${DPATH}ip.tmp)
-MNIP2=$(sed -n '5p' < ${DPATH}ip.tmp)
-MNIP3=$(sed -n '6p' < ${DPATH}ip.tmp)
-MNIP4=$(sed -n '7p' < ${DPATH}ip.tmp)
-MNIP5=$(sed -n '8p' < ${DPATH}ip.tmp)
-MNIP6=$(sed -n '9p' < ${DPATH}ip.tmp)
-MNIP7=$(sed -n '10p' < ${DPATH}ip.tmp)
-MNIP8=$(sed -n '11p' < ${DPATH}ip.tmp)
-MNIP9=$(sed -n '12p' < ${DPATH}ip.tmp)
-MNIP10=$(sed -n '13p' < ${DPATH}ip.tmp)
+sudo touch ${DPATH}ip.tbl
+echo \#If editing IP Table list them below.  Starting from masternode 1 to 10 > ${DPATH}ip.tbl
+echo \#IPv4 and IPv6 are accepted.  Masternode needs to be rebuilt >> ${DPATH}ip.tbl
+echo \#unless IPs are entered in configuration directly.  >> ${DPATH}ip.tbl
+echo $(hostname -I | cut -f1 -d' ') >> ${DPATH}ip.tbl
+for i in {15362..15372}; do printf "${IP}:%.4x\n" $i >> ${DPATH}ip.tbl; done
+MNIP1=$(sed -n '4p' < ${DPATH}ip.tbl)
+MNIP2=$(sed -n '5p' < ${DPATH}ip.tbl)
+MNIP3=$(sed -n '6p' < ${DPATH}ip.tbl)
+MNIP4=$(sed -n '7p' < ${DPATH}ip.tbl)
+MNIP5=$(sed -n '8p' < ${DPATH}ip.tbl)
+MNIP6=$(sed -n '9p' < ${DPATH}ip.tbl)
+MNIP7=$(sed -n '10p' < ${DPATH}ip.tbl)
+MNIP8=$(sed -n '11p' < ${DPATH}ip.tbl)
+MNIP9=$(sed -n '12p' < ${DPATH}ip.tbl)
+MNIP10=$(sed -n '13p' < ${DPATH}ip.tbl)
 fi
 }
 build_first_node(){
@@ -1291,20 +1317,19 @@ cd /root/${COIN3l}
 echo "Attempting to get Bootstrap, please wait"
 pause
 wget ${NEBootStrap}
-sleep 3
-sudo echo tar -xzf bootstrap.rar
+sleep 1
 if [ ! -d ${COINl}1/.${COINl} ]; then
   echo "Making /home/${COINl}1/.${COINl} "
   sudo mkdir /home/${COINl}1/.${COINl}
   else
   echo "Found /home/${COINl}1/.${COINl} "
 fi
-sudo mv /root/${COIN3l}/bootstrap.rar /home/${COINl}1/.${COINl}
+#add check before downloading
+sudo apt-get install unrar
+unrar e bootstrap.rar /home/${COINl}1/.${COINl}
 test_pause
 rm -rf /root/${COIN3l}
 }
-
-
 # installation Core
 function_install(){
 function_swap_space
@@ -1319,7 +1344,6 @@ launch_first_node
 wait_first_node_launch
 }
 #End installation Core
-
 #Program Core
 clear
 null_logo
