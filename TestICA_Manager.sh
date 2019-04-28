@@ -29,6 +29,8 @@ ADDNODE2=167.86.80.112
 ADDNODE3=45.32.234.220
 ADDNODE4=142.93.155.59
 ADDNODE5=95.216.236.193
+COINPORT=2219
+COINRPCPORT=29021
 #path to NullEntryDev stuff
 DPATH=/usr/local/nullentrydev/
 #IPCHECK
@@ -253,7 +255,10 @@ read_manager_ICAMasternodes(){
     3) manager_Start_Masternodes ;;
     4) manager_stop_Masternodes ;;
     5) function_menu_Reindex_Masternodes ;;
+    b) echo ;;
+    B) echo ;;
     x) exit 0;;
+    X) exit 0;;
 		*) echo -e "${RED}Error...${STD}" ${CLEAR} && sleep 2
 	esac
 }
@@ -948,8 +953,7 @@ function_first_nodecheck(){
         echo -e "${GREEN}information you need for your masternode.conf on your local wallet"
         echo
         echo -e ${GREEN}"Please Enter Your First Masternode Private Key:"${CLEAR}
-        read MNKEY
-
+        read MNKEY1
         function_install
         #add Regex or "are you sure"
         fi
@@ -994,7 +998,16 @@ rm -rf /root/${COIN3l}
 ##Make Node configuration file
 function_build_node_configuration(){
   echo -e "${GREEN}Configuring ${COIN} Masternode #${nodeunit} ${CLEAR}"
-  sudo mkdir /home/${COINl}${nodeunit}/.${COINl}
+  if [ ! -d /home/${COINl}${nodeunit} ]; then
+      sudo mkdir /home/${COINl}${nodeunit}
+      test_pause
+      echo test mkdir /home/${COINl}${nodeunit}
+  fi
+  if [ ! -d /home/${COINl}${nodeunit}/.${COINl} ]; then
+      sudo mkdir /home/${COINl}${nodeunit}/.${COINl}
+      test_pause
+      echo test mkdir /home/${COINl}${nodeunit}/.${COINl}
+  fi
   sudo touch /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
   echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
   echo "rpcpassword=pass"`shuf -i 100000-9999999 -n 1` >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
@@ -1011,8 +1024,44 @@ function_build_node_configuration(){
     echo "externalip=${MNIP1}:$COINPORT" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
     elif [[ $nodeunit -eq 2 ]] ; then
       echo "externalip=[${MNIP2}]:$COINPORT" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+    elif [[ $nodeunit -eq 3 ]] ; then
+      echo "externalip=[${MNIP3}]:$COINPORT" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+    elif [[ $nodeunit -eq 4 ]] ; then
+      echo "externalip=[${MNIP4}]:$COINPORT" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+    elif [[ $nodeunit -eq 5 ]] ; then
+      echo "externalip=[${MNIP5}]:$COINPORT" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+    elif [[ $nodeunit -eq 6 ]] ; then
+      echo "externalip=[${MNIP6}]:$COINPORT" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+    elif [[ $nodeunit -eq 7 ]] ; then
+      echo "externalip=[${MNIP7}]:$COINPORT" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+    elif [[ $nodeunit -eq 8 ]] ; then
+      echo "externalip=[${MNIP8}]:$COINPORT" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+    elif [[ $nodeunit -eq 9 ]] ; then
+      echo "externalip=[${MNIP9}]:$COINPORT" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+    elif [[ $nodeunit -eq 10 ]] ; then
+      echo "externalip=[${MNIP10}]:$COINPORT" >> /home/${COINl}0/.${COINl}/${COINCONFIG}
   fi
-  echo "masternodeprivkey=$privkey" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+  if [[ $nodeunit -eq 1 ]] ; then
+  echo "masternodeprivkey=$MNKEY1" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+elif [[ $nodeunit -eq 2 ]] ; then
+  echo "masternodeprivkey=$MNKEY2" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+elif [[ $nodeunit -eq 3 ]] ; then
+  echo "masternodeprivkey=$MNKEY3" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+elif [[ $nodeunit -eq 4 ]] ; then
+  echo "masternodeprivkey=$MNKEY4" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+elif [[ $nodeunit -eq 5 ]] ; then
+  echo "masternodeprivkey=$MNKEY5" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+elif [[ $nodeunit -eq 6 ]] ; then
+  echo "masternodeprivkey=$MNKEY6" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+elif [[ $nodeunit -eq 7 ]] ; then
+  echo "masternodeprivkey=$MNKEY7" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+elif [[ $nodeunit -eq 8 ]] ; then
+  echo "masternodeprivkey=$MNKEY8" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+elif [[ $nodeunit -eq 9 ]] ; then
+  echo "masternodeprivkey=$MNKEY9" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
+elif [[ $nodeunit -eq 10 ]] ; then
+  echo "masternodeprivkey=$MNKEY10" >> /home/${COINl}0/.${COINl}/${COINCONFIG}
+fi
   ###Add Nodes Updates if 1st node skip, otherwise add 1st node as add node
   if [[ $nodeunit -eq 1 ]] ; then
   echo "addnode=$ADDNODE0" >> /home/${COINl}${nodeunit}/.${COINl}/${COINCONFIG}
@@ -1050,11 +1099,11 @@ echo -e "${YELLOW}Once complete, it will stop and copy the block chain to${CLEAR
 echo -e "${YELLOW}the other masternodes.  This prevent all masternodes${CLEAR}"
 echo -e "${YELLOW}from downloading the block chain individually; taking up${CLEAR}"
 echo -e "${YELLOW}more time and resources.  Current Block count will be displayed below.${CLEAR}"
-ichiba-cli -datadir=/home/ichiba/.ichiba getblockcount
+${COINDAEMONCLI} -datadir=/home/${COINl}${nodeunit}/${COINCORE} getblockcount
 sleep 5
 #node 1 sync check
-until ichiba-cli -datadir=/home/ichiba/.ichiba mnsync status | grep -m 1 'IsBlockchainSynced" : true'; do
-    ichiba-cli -datadir=/home/ichiba/.ichiba getblockcount
+until ${COINDAEMONCLI} -datadir=/home/${COINl}${nodeunit}/${COINCORE} mnsync status | grep -m 1 'IsBlockchainSynced" : true'; do
+    ${COINDAEMONCLI} -datadir=/home/${COINl}${nodeunit}/${COINCORE} getblockcount
     sleep 5
   done
   test_pause
@@ -1066,7 +1115,7 @@ replicate_node(){
   echo
   sleep 5
   cd /
-  ichiba-cli -datadir=/home/ichiba/.ichiba stop
+  ${COINDAEMONCLI} -datadir=/home/${COINl}/${COINCORE} stop
   sleep 10
   sudo cp -r /home/${COINl}/.${COINl}/* /home/${COINl}2/.${COINl}/
   sudo rm /home/${COINl}2/.${COINl}/${COINCONFIG}
@@ -1074,35 +1123,6 @@ replicate_node(){
   sleep 5
 start_All_Nodes
 }
-##Configure other nodes
-configure_nonleadNodes(){
-  echo
-echo -e "${GREEN}Configuring Second ${COIN} Node${CLEAR}"
-sudo mkdir /home/${COINl}2/.${COINl}
-sudo touch /home/${COINl}2/${COINCONFIG}
-echo "rpcuser=user"`shuf -i 100000-9999999 -n 1` >> /home/${COINl}2/${COINCONFIG}
-echo "rpcpassword=pass"`shuf -i 100000-9999999 -n 1` >> /home/${COINl}2/${COINCONFIG}
-echo "rpcallowip=127.0.0.1" >> /home/${COINl}2/${COINCONFIG}
-echo "server=1" >> /home/${COINl}2/${COINCONFIG}
-echo "daemon=1" >> /home/${COINl}2/${COINCONFIG}
-echo "maxconnections=250" >> /home/${COINl}2/${COINCONFIG}
-echo "masternode=1" >> /home/${COINl}2/${COINCONFIG}
-echo "rpcport=${COINRPCPORT2}" >> /home/${COINl}2/${COINCONFIG}
-echo "listen=0" >> /home/${COINl}2/${COINCONFIG}
-echo "externalip=[${MNIP2}]:$COINPORT" >> /home/${COINl}2/${COINCONFIG}
-echo "masternodeprivkey=$privkey2" >> /home/${COINl}2/${COINCONFIG}
-# Inserting Version to nullentrydev files
-if [[ $NULLREC = "y" ]] ; then
-  echo "masterNode2 : true" >> /usr/local/nullentrydev/${COIN3l}.log
-  echo "walletVersion2 : $COINVERSION" >> /usr/local/nullentrydev/${COIN3l}.log
-  echo "scriptVersion2 : $SCRIPTVERSION" >> /usr/local/nullentrydev/${COIN3l}.log
-fi
-sleep 3
-echo
-# Starting Second Masternode daemon
-echo -e ${BOLD}"Second ${COIN3} Node Staged for launch"${CLEAR}
-}
-
 ### Start - Masternode function_calculate_Masternode_Install
 function_new_masternode_install_menu(){
   echo -e ${GREEN}" How many ${COIN3} Masternode(s) would you like to Install? [1 - 8]"${CLEAR}
@@ -1231,12 +1251,22 @@ echo ${MNIP1} testing note
 echo ${IP} testing note
 echo -e ${YELLOW} "Building IP Tables"${CLEAR}
 sudo touch ${DPATH}ip.tmp
-for i in {15361..15375}; do printf "${IP}:%.4x\n" $i >> ${DPATH}ip.tmp; done
-MNIP1=$(hostname -I | cut -f1 -d' ')
-MNIP2=$(sed -n '2p' < ${DPATH}ip.tmp)
-rm -rf ${DPATH}ip.tmp
+echo \#If editing IP Table list them below.  Starting from masternode 1 to 10 > ${DPATH}ip.tmp
+echo \#IPv4 and IPv6 are accepted.  Masternode needs to be rebuilt >> ${DPATH}ip.tmp
+echo \#unless IPs are entered in configuration directly.  >> ${DPATH}ip.tmp
+echo $(hostname -I | cut -f1 -d' ') >> ${DPATH}ip.tmp
+for i in {15362..15372}; do printf "${IP}:%.4x\n" $i >> ${DPATH}ip.tmp; done
+MNIP1=$(sed -n '4p' < ${DPATH}ip.tmp)
+MNIP2=$(sed -n '5p' < ${DPATH}ip.tmp)
+MNIP3=$(sed -n '6p' < ${DPATH}ip.tmp)
+MNIP4=$(sed -n '7p' < ${DPATH}ip.tmp)
+MNIP5=$(sed -n '8p' < ${DPATH}ip.tmp)
+MNIP6=$(sed -n '9p' < ${DPATH}ip.tmp)
+MNIP7=$(sed -n '10p' < ${DPATH}ip.tmp)
+MNIP8=$(sed -n '11p' < ${DPATH}ip.tmp)
+MNIP9=$(sed -n '12p' < ${DPATH}ip.tmp)
+MNIP10=$(sed -n '13p' < ${DPATH}ip.tmp)
 fi
-
 }
 build_first_node(){
 function_update
@@ -1264,12 +1294,12 @@ wget ${NEBootStrap}
 sleep 3
 sudo echo tar -xzf bootstrap.rar
 if [ ! -d ${COINl}1/.${COINl} ]; then
-  echo "Making /home/${COINl}${nodeunit}/.${COINl} "
-  sudo mkdir /home/${COINl}${nodeunit}/.${COINl}
+  echo "Making /home/${COINl}1/.${COINl} "
+  sudo mkdir /home/${COINl}1/.${COINl}
   else
-  echo "Found /home/${COINl}${nodeunit}/.${COINl} "
+  echo "Found /home/${COINl}1/.${COINl} "
 fi
-sudo mv /root/${COIN3l}/bootstrap.rar /home/${COINl}${nodeunit}/.${COINl}
+sudo mv /root/${COIN3l}/bootstrap.rar /home/${COINl}1/.${COINl}
 test_pause
 rm -rf /root/${COIN3l}
 }
